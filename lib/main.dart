@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo/screens/dashboard.dart';
+import 'package:todo/screens/task_form.dart';
+import 'package:todo/screens/tasks_list.dart';
 
 void main() => runApp(const TodoApp());
 
@@ -21,54 +24,6 @@ class TodoApp extends StatelessWidget {
           ),
       ),
       home: Dashboard(),
-    );
-  }
-}
-
-class Dashboard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('images/todo-icon.png'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              height: 70,
-              width: 110,
-              color: Colors.red,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.check,
-                    color: Colors.white,
-                    size: 24.0,
-                  ),
-                  Text(
-                    'Tasks',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
     );
   }
 }
