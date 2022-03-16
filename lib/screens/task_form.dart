@@ -47,7 +47,7 @@ class _TaskFormState extends State<TaskForm> {
                       final String? title = _titleController.text;
                       final String? subtitle = _subtitleController.text;
                       
-                      final Task newTask = Task(title!, subtitle!);
+                      final Task newTask = Task(0, title!, subtitle!);
                       Navigator.pop(context, newTask);
                     },
                     child: const Text('Create')

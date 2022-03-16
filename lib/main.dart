@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todo/database/app_database.dart';
+import 'package:todo/models/task.dart';
 import 'package:todo/screens/dashboard.dart';
 import 'package:todo/screens/task_form.dart';
 import 'package:todo/screens/tasks_list.dart';
 
-void main() => runApp(const TodoApp());
+void main() {
+  runApp(const TodoApp());
+  save(Task(0, 'Do the dishes', 'with water')).then((id){
+    findAll().then((tasks) => debugPrint(tasks.toString()));
+  });
+}
 
 class TodoApp extends StatelessWidget {
   const TodoApp({Key? key}) : super(key: key);
