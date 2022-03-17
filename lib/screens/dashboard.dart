@@ -6,7 +6,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,19 +27,19 @@ class Dashboard extends StatelessWidget {
                   ));
                 },
                 child: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   height: 70,
                   width: 110,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.check,
                         color: Colors.white,
                         size: 24.0,
                       ),
-                      Text(
+                      const Text(
                         'Tasks',
                         style: TextStyle(
                             color: Colors.white,

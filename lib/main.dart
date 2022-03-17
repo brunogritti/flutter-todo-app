@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo/database/app_database.dart';
-import 'package:todo/models/task.dart';
 import 'package:todo/screens/dashboard.dart';
-import 'package:todo/screens/task_form.dart';
-import 'package:todo/screens/tasks_list.dart';
 
 void main() {
   runApp(const TodoApp());
-  save(Task(0, 'Do the dishes', 'with water')).then((id){
-    findAll().then((tasks) => debugPrint(tasks.toString()));
-  });
 }
 
 class TodoApp extends StatelessWidget {
@@ -26,7 +19,7 @@ class TodoApp extends StatelessWidget {
             buttonColor: Colors.redAccent[700],
             textTheme: ButtonTextTheme.primary,
           ),
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
             backgroundColor: Color(0xFF0A0E21),
           ),
       ),

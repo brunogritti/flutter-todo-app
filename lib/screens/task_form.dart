@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/database/dao/task_dao.dart';
 import 'package:todo/models/task.dart';
 
 class TaskForm extends StatefulWidget {
@@ -12,12 +13,13 @@ class _TaskFormState extends State<TaskForm> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _subtitleController = TextEditingController();
+  final TaskDao _dao = TaskDao();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Task'),
+        title: const Text('New Task'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -25,7 +27,7 @@ class _TaskFormState extends State<TaskForm> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Title',
               ),
             ),
@@ -48,7 +50,7 @@ class _TaskFormState extends State<TaskForm> {
                       final String? subtitle = _subtitleController.text;
                       
                       final Task newTask = Task(0, title!, subtitle!);
-                      Navigator.pop(context, newTask);
+                      _dao.save(newTask).then((id) => Navigator.pop(context));
                     },
                     child: const Text('Create')
                 ),
