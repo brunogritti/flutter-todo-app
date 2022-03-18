@@ -11,6 +11,9 @@ class TasksList extends StatefulWidget {
 
 class _TasksListState extends State<TasksList> {
   final TaskDao _dao = TaskDao();
+  refresh() {
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,7 @@ class _TasksListState extends State<TasksList> {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 final task = tasks![index];
-                return _TaskItem(task);
+                return _TaskItem(task, refresh);
               },
               itemCount: tasks?.length,
             );
@@ -53,17 +56,53 @@ class _TasksListState extends State<TasksList> {
   }
 }
 
-class _TaskItem extends StatelessWidget {
+class _TaskItem extends StatefulWidget {
   final Task task;
+  final Function() notifyParent;
 
-  _TaskItem(this.task);
+  _TaskItem(this.task, this.notifyParent);
+
+  @override
+  State<_TaskItem> createState() => _TaskItemState();
+}
+
+class _TaskItemState extends State<_TaskItem> {
+  final TaskDao _dao = TaskDao();
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(task.title, style: const TextStyle(fontSize: 22.0),),
-        subtitle: Text(task.subtitle, style: const TextStyle(fontSize: 16.0),),
+        title: Text(widget.task.title, style: const TextStyle(fontSize: 22.0),),
+        subtitle: Text(widget.task.subtitle, style: const TextStyle(fontSize: 16.0),),
+        trailing: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Você deseja apagar essa tarefa?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _dao.delete(widget.task.id).then((id) {
+                        setState(() {});
+                        Navigator.pop(context, 'OK');
+                        widget.notifyParent();
+                      });
+                    });
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          ),
+          child: Icon(Icons.restore_from_trash),
+        ),
       ),
     );
   }
