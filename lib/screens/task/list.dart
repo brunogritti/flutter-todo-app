@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo/screens/task_form.dart';
+import 'package:todo/screens/task/form.dart';
 
-import '../database/dao/task_dao.dart';
-import '../models/task.dart';
+import '../../database/dao/task_dao.dart';
+import '../../models/task.dart';
 
 class TasksList extends StatefulWidget {
   @override
@@ -101,7 +101,7 @@ class _TaskItemState extends State<_TaskItem> {
               ],
             ),
           ),
-          child: Icon(Icons.restore_from_trash),
+          child: Icon(Icons.delete),
         ),
       ),
     );
